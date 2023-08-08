@@ -1,37 +1,38 @@
 <template>
-  <Bar :data="data" :options="options" />
+    <div id="scatter-plot">
+        <Scatter :data="data" :options="options" />
+    </div>
 </template>
 
 <script lang="ts">
 import {
   Chart as ChartJS,
-  Title,
+  LinearScale,
+  PointElement,
+  LineElement,
   Tooltip,
   Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale
+  Title
 } from 'chart.js'
-import { Bar } from 'vue-chartjs'
+import { Scatter } from 'vue-chartjs'
+import * as chartConfig from './chartConfig.js'
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+ChartJS.register(LinearScale, PointElement, Title, Tooltip, Legend)
 
 export default {
   name: 'App',
   components: {
-    Bar
+    Scatter
   },
   data() {
-    return {
-      data: {
-        labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
-        datasets: [{ data: [40, 20, 12, 49, 2, 1, 4, 29, 11, 50] }]
-      },
-      options: {
-        responsive: true,
-        indexAxis: 'y'
-      }
-    }
+    return chartConfig
   }
 }
 </script>
+
+<style>
+#scatter-plot {
+    height: 800px;
+    width: 1200px;
+}
+</style>
